@@ -8,7 +8,9 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement); // Create a root with createRoot
 
 root.render(
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    {" "}
+    {/* Add basename here */}
     <ModalProvider>
       <App />
     </ModalProvider>
