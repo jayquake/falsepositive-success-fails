@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumbs, Paper, Typography } from "@material-ui/core";
+import { Breadcrumbs, Paper, Typography } from "@mui/material";
 import { useLocation, NavLink } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Grid from "@mui/material/Grid";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import "./styles.css";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from '@mui/material/styles';
 import {
   Link,
   Container,
@@ -14,9 +14,9 @@ import {
   Toolbar,
   List,
   Divider,
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+} from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems, secondaryListItems } from "./listItems";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Home from "./components/pages/Home";

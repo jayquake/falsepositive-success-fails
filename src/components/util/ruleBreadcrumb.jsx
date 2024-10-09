@@ -5,7 +5,7 @@ import {
   Typography,
   Select,
   MenuItem
-} from "@material-ui/core";
+} from "@mui/material";
 import { useLocation, NavLink } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Grid from "@mui/material/Grid";

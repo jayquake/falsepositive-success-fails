@@ -1,17 +1,15 @@
 {
   "name": "rule-success-and-failures",
   "version": "1.0.0",
+  "homepage": "https://jayquake.github.io/falsepositive-success-fails",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@emotion/react": "11.11.1",
-    "@emotion/styled": "11.11.0",
-    "@material-ui/core": "^4.12.4",
-    "@material-ui/icons": "^4.11.3",
-    "@mui/icons-material": "^5.15.10",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.16.7",
     "@mui/joy": "^5.0.0-beta.28",
-    "@mui/material": "^5.15.10",
-    "@mui/styles": "^5.15.10",
+    "@mui/material": "^5.16.7",
     "csbbust": "1.0.1",
     "eslint-plugin-react-hooks": "4.6.0",
     "node": "21.6.2",
@@ -24,13 +22,16 @@
     "redux": "4.2.1"
   },
   "devDependencies": {
-    "@babel/runtime": "7.13.8"
+    "@babel/runtime": "7.13.8",
+    "gh-pages": "^6.1.1"
   },
-  "scripts": {
+  "scripts": {                
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
