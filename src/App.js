@@ -37,7 +37,7 @@ import FormruleRoutes from "./components/pages/Criteria/Forms/rules/FormruleRout
 import ClickableruleRoutes from "./components/pages/Criteria/Clickables/rules/ClickableruleRoutes";
 import ItemPage from "./components/layout/rulePage";
 import ListRoutes from "./routes/routes";
-import { fetchItemData } from "./components/util/dataService"; // Import your data fetching function
+import { fetchItemData } from "./components/util/dataService";
 import FormListRulesWithRoutes from "./components/pages/Criteria/Forms/Forms";
 import AllRulesWithRoutes from "./components/pages/Criteria/AllRulesLinks";
 
@@ -84,23 +84,21 @@ export default function App() {
       <CssBaseline />
       <AppBar
         position="absolute"
-        sx={{
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-          transition: (theme) =>
-            theme.transitions.create(["width", "margin"], {
-              easing: theme.transitions.easing.sharp,
-              duration: theme.transitions.duration.leavingScreen,
-            }),
+        sx={(theme) => ({
+          zIndex: theme.zIndex.drawer + 1,
+          transition: theme.transitions.create(["width", "margin"], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+          }),
           ...(open && {
             marginLeft: drawerWidth,
             width: `calc(100% - ${drawerWidth}px)`,
-            transition: (theme) =>
-              theme.transitions.create(["width", "margin"], {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
-              }),
+            transition: theme.transitions.create(["width", "margin"], {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.enteringScreen,
+            }),
           }),
-        }}
+        })}
       >
         <Toolbar sx={{ paddingRight: 24 }}>
           <IconButton
@@ -108,7 +106,10 @@ export default function App() {
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
-            sx={{ marginRight: 36, ...(open && { display: "none" }) }}
+            sx={(theme) => ({
+              marginRight: 36,
+              ...(open && { display: "none" }),
+            })}
           >
             <MenuIcon />
           </IconButton>
@@ -131,39 +132,37 @@ export default function App() {
       <Drawer
         variant="permanent"
         open={open}
-        sx={{
+        sx={(theme) => ({
           "& .MuiDrawer-paper": {
             position: "relative",
             whiteSpace: "nowrap",
             width: drawerWidth,
-            transition: (theme) =>
-              theme.transitions.create("width", {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
-              }),
+            transition: theme.transitions.create("width", {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.enteringScreen,
+            }),
             ...(open || {
               overflowX: "hidden",
-              transition: (theme) =>
-                theme.transitions.create("width", {
-                  easing: theme.transitions.easing.easeIn,
-                  duration: theme.transitions.duration.leavingScreen,
-                }),
-              width: (theme) => theme.spacing(7),
+              transition: theme.transitions.create("width", {
+                easing: theme.transitions.easing.easeIn,
+                duration: theme.transitions.duration.leavingScreen,
+              }),
+              width: theme.spacing(7),
               [theme.breakpoints.up("sm")]: {
-                width: (theme) => theme.spacing(9),
+                width: theme.spacing(9),
               },
             }),
           },
-        }}
+        })}
       >
         <div
-          sx={{
+          sx={(theme) => ({
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
             padding: "0 8px",
-            ...(theme) => theme.mixins.toolbar,
-          }}
+            ...theme.mixins.toolbar,
+          })}
         >
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
@@ -193,7 +192,54 @@ export default function App() {
                 <AllRulesWithRoutes itemData={itemData} navigate={navigate} />
               }
             />
-            {/* Add your other routes here */}
+            <Route
+              path="clickables"
+              element={<Clickables navigate={navigate} title="Clickables" />}
+            />
+            <Route
+              path="context"
+              element={<Context navigate={navigate} title="Context" />}
+            />
+            <Route
+              path="headings"
+              element={<Headings navigate={navigate} title="Headings" />}
+            />
+            <Route
+              path="document"
+              element={<Document navigate={navigate} title="Document" />}
+            />
+            <Route
+              path="errors"
+              element={<Errors navigate={navigate} title="Errors" />}
+            />
+            <Route
+              path="forms"
+              element={<Forms navigate={navigate} title="Forms" />}
+            />
+
+            <Route
+              path="graphics"
+              element={<Graphics navigate={navigate} title="Graphics" />}
+            />
+            <Route
+              path="keyboard"
+              element={<Keyboard navigate={navigate} title="Keyboard" />}
+            />
+            {KeyboardRoutes}
+            {FormruleRoutes}
+            {ClickableruleRoutes}
+            <Route
+              path="navigation"
+              element={<Navigation navigate={navigate} title="Navigation" />}
+            />
+            <Route
+              path="readability"
+              element={<Readability navigate={navigate} title="Readability" />}
+            />
+            <Route
+              path="tables"
+              element={<Tables navigate={navigate} title="Tables" />}
+            />
           </Routes>
           <Box pt={4}>
             <Copyright />
