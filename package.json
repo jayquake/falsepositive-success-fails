@@ -1,7 +1,7 @@
 {
   "name": "rule-success-and-failures",
   "version": "1.0.0",
-  "homepage": "https://jayquake.github.io/falsepositive-success-fails/",
+  "homepage": "https://jayquake.github.io/falsepositive-success-fails",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

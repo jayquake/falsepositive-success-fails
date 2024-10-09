@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client"; // Import createRoot from react-dom/client
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom"; // Use HashRouter instead of BrowserRouter
 import App from "./App";
 import { ModalProvider } from "./components/util/ModalContext"; // Import the ModalProvider
 
@@ -8,11 +8,9 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement); // Create a root with createRoot
 
 root.render(
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
-    {" "}
-    {/* Add basename here */}
+  <HashRouter>
     <ModalProvider>
       <App />
     </ModalProvider>
-  </BrowserRouter>
+  </HashRouter>
 );
