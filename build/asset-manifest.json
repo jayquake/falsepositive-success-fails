@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/falsepositive-success-fails/static/css/main.b9cb629d.css",
+    "main.js": "/falsepositive-success-fails/static/js/main.77b66e0c.js",
+    "index.html": "/falsepositive-success-fails/index.html",
+    "main.b9cb629d.css.map": "/falsepositive-success-fails/static/css/main.b9cb629d.css.map",
+    "main.77b66e0c.js.map": "/falsepositive-success-fails/static/js/main.77b66e0c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b9cb629d.css",
+    "static/js/main.77b66e0c.js"
+  ]
+}
