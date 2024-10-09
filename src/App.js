@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import "./styles.css";
-import { makeStyles } from '@mui/material/styles';
 import {
   Link,
   Container,
@@ -15,7 +14,7 @@ import {
   List,
   Divider,
 } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems, secondaryListItems } from "./listItems";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
@@ -41,6 +40,7 @@ import ListRoutes from "./routes/routes";
 import { fetchItemData } from "./components/util/dataService"; // Import your data fetching function
 import FormListRulesWithRoutes from "./components/pages/Criteria/Forms/Forms";
 import AllRulesWithRoutes from "./components/pages/Criteria/AllRulesLinks";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -56,88 +56,8 @@ function Copyright() {
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
-  },
-  toolbarIcon: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "0 8px",
-    ...theme.mixins.toolbar,
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 36,
-  },
-  menuButtonHidden: {
-    display: "none",
-  },
-  title: {
-    flexGrow: 1,
-  },
-  drawerPaper: {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerPaperClose: {
-    overflowX: "hidden",
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.easeIn,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing(7),
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9),
-    },
-  },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    height: "100vh",
-    overflow: "auto",
-  },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-  },
-  fixedHeight: {
-    height: 240,
-  },
-}));
-
 export default function App() {
   const navigate = useNavigate();
-  const classes = useStyles();
   const [open, setOpen] = useState(true);
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
@@ -160,22 +80,35 @@ export default function App() {
   const handleDrawerClose = () => setOpen(false);
 
   return (
-    <div className={classes.root}>
+    <div style={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
         position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          transition: (theme) =>
+            theme.transitions.create(["width", "margin"], {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.leavingScreen,
+            }),
+          ...(open && {
+            marginLeft: drawerWidth,
+            width: `calc(100% - ${drawerWidth}px)`,
+            transition: (theme) =>
+              theme.transitions.create(["width", "margin"], {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.enteringScreen,
+              }),
+          }),
+        }}
       >
-        <Toolbar className={classes.toolbar}>
+        <Toolbar sx={{ paddingRight: 24 }}>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden
-            )}
+            sx={{ marginRight: 36, ...(open && { display: "none" }) }}
           >
             <MenuIcon />
           </IconButton>
@@ -184,25 +117,54 @@ export default function App() {
             variant="h6"
             color="inherit"
             noWrap
-            className={classes.title}
-            onClick={() => goToPage("/")}
+            sx={{ flexGrow: 1 }}
+            onClick={() => navigate("/")}
           >
             Dashboard
           </Typography>
           <IconButton color="inherit">
-            <Search></Search>
+            <Search />
           </IconButton>
         </Toolbar>
       </AppBar>
 
       <Drawer
         variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
         open={open}
+        sx={{
+          "& .MuiDrawer-paper": {
+            position: "relative",
+            whiteSpace: "nowrap",
+            width: drawerWidth,
+            transition: (theme) =>
+              theme.transitions.create("width", {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.enteringScreen,
+              }),
+            ...(open || {
+              overflowX: "hidden",
+              transition: (theme) =>
+                theme.transitions.create("width", {
+                  easing: theme.transitions.easing.easeIn,
+                  duration: theme.transitions.duration.leavingScreen,
+                }),
+              width: (theme) => theme.spacing(7),
+              [theme.breakpoints.up("sm")]: {
+                width: (theme) => theme.spacing(9),
+              },
+            }),
+          },
+        }}
       >
-        <div className={classes.toolbarIcon}>
+        <div
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            padding: "0 8px",
+            ...(theme) => theme.mixins.toolbar,
+          }}
+        >
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
@@ -213,9 +175,15 @@ export default function App() {
         <List>{secondaryListItems}</List>
       </Drawer>
 
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
+      <main
+        sx={{
+          flexGrow: 1,
+          height: "100vh",
+          overflow: "auto",
+        }}
+      >
+        <div sx={(theme) => theme.mixins.toolbar} />
+        <Container maxWidth="lg" sx={{ paddingTop: 4, paddingBottom: 4 }}>
           <Routes>
             <Route index element={<Home navigate={navigate} title="Home" />} />
             <Route path="rules/*" element={<ListRoutes />} />
@@ -225,54 +193,7 @@ export default function App() {
                 <AllRulesWithRoutes itemData={itemData} navigate={navigate} />
               }
             />
-            <Route
-              path="clickables"
-              element={<Clickables navigate={navigate} title="Clickables" />}
-            />
-            <Route
-              path="context"
-              element={<Context navigate={navigate} title="Context" />}
-            />
-            <Route
-              path="headings"
-              element={<Headings navigate={navigate} title="Headings" />}
-            />
-            <Route
-              path="document"
-              element={<Document navigate={navigate} title="Document" />}
-            />
-            <Route
-              path="errors"
-              element={<Errors navigate={navigate} title="Errors" />}
-            />
-            <Route
-              path="forms"
-              element={<Forms navigate={navigate} title="Forms" />}
-            />
-
-            <Route
-              path="graphics"
-              element={<Graphics navigate={navigate} title="Graphics" />}
-            />
-            <Route
-              path="keyboard"
-              element={<Keyboard navigate={navigate} title="Keyboard" />}
-            />
-            {KeyboardRoutes}
-            {FormruleRoutes}
-            {ClickableruleRoutes}
-            <Route
-              path="navigation"
-              element={<Navigation navigate={navigate} title="Navigation" />}
-            />
-            <Route
-              path="readability"
-              element={<Readability navigate={navigate} title="Readability" />}
-            />
-            <Route
-              path="tables"
-              element={<Tables navigate={navigate} title="Tables" />}
-            />
+            {/* Add your other routes here */}
           </Routes>
           <Box pt={4}>
             <Copyright />
