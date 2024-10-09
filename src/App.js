@@ -135,54 +135,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function callit() {
-  console.log("arguments", arguments);
-}
-
-callit(["a", "b"]);
-
 export default function App() {
   const navigate = useNavigate();
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
-  const path = String(pathnames);
-  const currentPath = pathnames[1];
+  const currentPath = pathnames[1] || "";
 
-  // State to store the item data
   const [itemData, setItemData] = useState(null);
-  console.log(itemData);
-  // Function to fetch and set the item data
+
   const fetchItem = (currentRule) => {
-    //console.log(`Found Data ${currentRule}`);
-    fetchItemData(currentRule) // Replace with your actual data fetching function
-      .then((data) => {
-        setItemData(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching item data:", error);
-      });
+    fetchItemData(currentRule)
+      .then((data) => setItemData(data))
+      .catch((error) => console.error("Error fetching item data:", error));
   };
 
   useEffect(() => {
-    // Fetch the item data when the component mounts
-    fetchItem(currentPath); // Assuming 'path' contains the itemID from the URL
+    fetchItem(currentPath);
+    return undefined; // Optional safeguard
   }, [currentPath]);
 
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-  }
-  const formattedPath = capitalizeFirstLetter(path);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const handleDrawerOpen = () => setOpen(true);
+  const handleDrawerClose = () => setOpen(false);
 
   return (
     <div className={classes.root}>
@@ -199,7 +174,7 @@ export default function App() {
             onClick={handleDrawerOpen}
             className={clsx(
               classes.menuButton,
-              open && classes.menuButtonHidden,
+              open && classes.menuButtonHidden
             )}
           >
             <MenuIcon />
@@ -212,7 +187,7 @@ export default function App() {
             className={classes.title}
             onClick={() => goToPage("/")}
           >
-            Dashboard - {formattedPath}
+            Dashboard
           </Typography>
           <IconButton color="inherit">
             <Search></Search>
