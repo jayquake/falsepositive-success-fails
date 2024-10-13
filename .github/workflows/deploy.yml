@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # or the branch you're deploying from
+      - gh-pages # or the branch you're deploying from
 
 jobs:
   deploy:
@@ -15,7 +15,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "16" # or whatever Node.js version you're using
+          node-version: "20.12.0" # or whatever Node.js version you're using
 
       - name: Install dependencies
         run: npm install
